@@ -1107,106 +1107,43 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
-			"get": {
-				"x-ms-examples": {
-					"Get a single playbook configuration of subscription": {
-						"$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationSubscription_example.json"
-					}
-				},
-				"tags": ["PlaybookConfigurations"],
-				"description": "Get the details of the playbook configuration in subscription.",
-				"operationId": "PlaybookConfigurations_GetBySubscription",
-				"parameters": [{
-					"$ref": "#/parameters/ApiVersion"
-				}, {
-					"$ref": "#/parameters/SubscriptionId"
-				}, {
-					"$ref": "#/parameters/playbookConfigurationName"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/PlaybookConfiguration"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			},
-			"put": {
-				"x-ms-examples": {
-          "Create or update a single playbook configuration of subscription": {
-            "$ref": "./examples/PlaybookConfigurations/PutPlaybookConfiguration_example.json"
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a single playbook configuration of subscription": {
+            "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationSubscription_example.json"
           }
-				},
-				"tags": ["PlaybookConfigurations"],
-				"operationId": "PlaybookConfigurations_CreateOrUpdateBySubscription",
-				"description": "Create or update a playbook configuration. If a playbook configuration is already created and a subsequent create request is issued with different properties, the playbook configuration properties will be updated.",
-				"parameters": [{
-					"$ref": "#/parameters/ApiVersion"
-				}, {
-					"$ref": "#/parameters/SubscriptionId"
-				}, {
-					"$ref": "#/parameters/playbookConfigurationName"
-				}, {
-					"$ref": "#/definitions/PlaybookConfiguration"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/PlaybookConfiguration"
-						}
-					},
-					"201": {
-						"description": "Created",
-						"schema": {
-							"$ref": "#/definitions/PlaybookConfiguration"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			},
-			"delete": {
-				"x-ms-examples": {
-					"Deletea  a single playbook configuration in a subscription scope": {
-						"$ref": "./examples/PlaybookConfigurations/DeletePlaybookConfigurationSubscription_example.json"
-					}
-				},
-				"tags": ["PlaybookConfigurations"],
-				"operationId": "PlaybookConfigurations_DeleteBySubscription",
-				"description": "Delete a playbook configuration.",
-				"parameters": [{
-					"$ref": "#/parameters/ApiVersion"
-				}, {
-					"$ref": "#/parameters/SubscriptionId"
-				}, {
-					"$ref": "#/parameters/playbookConfigurationName"
-				}],
-				"responses": {
-					"204": {
-						"description": "NoContent"
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			}
-		},
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "Get the details of the playbook configuration in subscription.",
+        "operationId": "PlaybookConfigurations_GetBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/playbookConfigurationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
 			"get": {
 				"x-ms-examples": {
@@ -1241,11 +1178,58 @@
 					}
 				}
 			},
+      "put": {
+        "x-ms-examples": {
+          "Get a single playbook configuration of resource group": {
+            "$ref": "./examples/PlaybookConfigurations/PutPlaybookConfiguration_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "Create or update a playbook configuration. If a playbook configuration is already created and a subsequent create request is issued with different properties, the playbook configuration properties will be updated.",
+        "operationId": "PlaybookConfigurations_CreateOrUpdateByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/playbookConfigurationName"
+          },
+          {
+            "$ref": "#/definitions/PlaybookConfiguration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
 			"delete": {
 				"x-ms-examples": {
-					"Delete a single playbook configuration in a resource group scope": {
-						"$ref": "./examples/PlaybookConfigurations/DeletePlaybookConfigurationResourceGroup_example.json"
-					}
+          "Delete a single playbook configuration in a resource group scope": {
+            "$ref": "./examples/PlaybookConfigurations/DeletePlaybookConfiguration_example.json"
+          }
 				},
 				"tags": ["PlaybookConfigurations"],
 				"operationId": "PlaybookConfigurations_DeleteByResourceGroup",

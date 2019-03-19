@@ -1,0 +1,479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2017-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/playbookConfigurations": {
+      "get": {
+        "x-ms-examples": {
+          "Get playbook configurations of subscription": {
+            "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationsSubscription_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "List playbook configurations in the subscription for the authenticated user.",
+        "operationId": "PlaybookConfigurations_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/playbookConfigurations": {
+      "get": {
+        "x-ms-examples": {
+          "Get playbook configurations of a single resource group": {
+            "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationsResourceGroup_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "List playbook configurations in the resource group for the authenticated user.",
+        "operationId": "PlaybookConfigurations_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a single playbook configuration of subscription": {
+            "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationSubscription_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "Get the details of the playbook configuration in subscription.",
+        "operationId": "PlaybookConfigurations_GetBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/playbookConfigurationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a single playbook configuration of resource group": {
+            "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationResourceGroup_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "Get the details of the playbook configuration.",
+        "operationId": "PlaybookConfigurations_GetByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/playbookConfigurationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Get a single playbook configuration of resource group": {
+            "$ref": "./examples/PlaybookConfigurations/PutPlaybookConfiguration_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "Create or update a playbook configuration. If a playbook configuration is already created and a subsequent create request is issued with different properties, the playbook configuration properties will be updated.",
+        "operationId": "PlaybookConfigurations_CreateOrUpdateByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/playbookConfigurationName"
+          },
+          {
+            "$ref": "#/definitions/PlaybookConfiguration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a single playbook configuration in a resource group scope": {
+            "$ref": "./examples/PlaybookConfigurations/DeletePlaybookConfiguration_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "operationId": "PlaybookConfigurations_DeleteByResourceGroup",
+        "description": "Delete a playbook configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/playbookConfigurationName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PlaybookConfigurationList": {
+      "description": "List of playbook configurations response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of playbook configurations.",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfiguration"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "PlaybookConfiguration": {
+      "type": "object",
+      "description": "The playbook configuration resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Playbook configuration data",
+          "$ref": "#/definitions/PlaybookConfigurationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PlaybookConfigurationProperties": {
+      "type": "object",
+      "description": "The playbook configuration data.",
+      "properties": {
+        "playbookConfigurationId": {
+          "type": "string",
+          "description": ""
+        },
+        "azureResourceFamilyId": {
+          "type": "string",
+          "description": ""
+        },
+        "displayName": {
+          "type": "string",
+          "description": ""
+        },
+        "description": {
+          "type": "string",
+          "description": ""
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": ""
+        },
+        "metadata": {
+          "type": "object",
+          "description": "",
+          "$ref": "#/definitions/PlaybookConfigurationMetadata"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationScope"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationSource"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationAction"
+          }
+        }
+      }
+    },
+    "PlaybookConfigurationMetadata": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "createdDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": ""
+        },
+        "createdBy": {
+          "type": "string",
+          "description": ""
+        },
+        "lastUpdatedDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": ""
+        },
+        "lastUpdatedBy": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PlaybookConfigurationScope": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "familyResourceId": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PlaybookConfigurationSource": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "eventSource": {
+          "type": "string",
+          "description": ""
+        },
+        "eventSourceVersionFrom": {
+          "type": "string",
+          "description": ""
+        },
+        "eventSourceVersionTo": {
+          "type": "string",
+          "description": ""
+        },
+        "ruleSets": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationTriggeringRuleSet"
+          }
+        }
+      }
+    },
+    "PlaybookConfigurationAction": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": ""
+        },
+        "type": {
+          "type": "string",
+          "description": ""
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": ""
+        }
+      }
+    },
+    "PlaybookConfigurationTriggeringRuleSet": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationTriggeringRule"
+          }
+        }
+      }
+    },
+    "PlaybookConfigurationTriggeringRule": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "eventValueJPath": {
+          "type": "string",
+          "description": ""
+        },
+        "eventValuePrimitiveTypeName": {
+          "type": "string",
+          "description": ""
+        },
+        "valueToCompareEventValueTo": {
+          "type": "string",
+          "description": ""
+        },
+        "valuesCompareOperand": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    }
+  },
+  "parameters": {
+    "playbookConfigurationName": {
+      "name": "playbookConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Playbook Configuration Id.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

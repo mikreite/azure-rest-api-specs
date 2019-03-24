@@ -177,7 +177,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Get a single playbook configuration of resource group": {
+          "Create or update a single playbook configuration of resource group": {
             "$ref": "./examples/PlaybookConfigurations/PutPlaybookConfiguration_example.json"
           }
         },
@@ -196,6 +196,9 @@
           },
           {
             "$ref": "#/parameters/playbookConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/Validate"
           },
           {
             "$ref": "#/definitions/PlaybookConfiguration"
@@ -325,6 +328,11 @@
           "description": "",
           "$ref": "#/definitions/PlaybookConfigurationMetadata"
         },
+        "runsSummary": {
+          "type": "object",
+          "description": "",
+          "$ref": "#/definitions/RunsSummary"
+        },
         "scopes": {
           "type": "array",
           "description": "",
@@ -353,21 +361,52 @@
       "description": "",
       "properties": {
         "createdDateTimeUtc": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": ""
         },
         "createdBy": {
+          "readOnly": true,
           "type": "string",
           "description": ""
         },
         "lastUpdatedDateTimeUtc": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": ""
         },
         "lastUpdatedBy": {
+          "readOnly": true,
           "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "RunsSummary": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "totalCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": ""
+        },
+        "completedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": ""
+        },
+        "failedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": ""
+        },
+        "lastRunDateTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
           "description": ""
         }
       }
@@ -395,10 +434,12 @@
           "description": ""
         },
         "eventSourceVersionFrom": {
+          "readOnly": true,
           "type": "string",
           "description": ""
         },
         "eventSourceVersionTo": {
+          "readOnly": true,
           "type": "string",
           "description": ""
         },
@@ -473,6 +514,14 @@
       "required": true,
       "type": "string",
       "description": "Playbook Configuration Id.",
+      "x-ms-parameter-location": "method"
+    },
+    "Validate": {
+      "name": "validate",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Indicates whether to perform a validation process only before PUT operation",
       "x-ms-parameter-location": "method"
     }
   }

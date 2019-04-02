@@ -99,43 +99,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a single playbook configuration of subscription": {
-            "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationSubscription_example.json"
-          }
-        },
-        "tags": [ "PlaybookConfigurations" ],
-        "description": "Get the details of the playbook configuration in subscription.",
-        "operationId": "PlaybookConfigurations_GetBySubscription",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/playbookConfigurationName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PlaybookConfiguration"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
       "get": {
         "x-ms-examples": {
@@ -300,62 +263,45 @@
       ]
     },
     "PlaybookConfigurationProperties": {
-      "type": "object",
-      "description": "The playbook configuration data.",
-      "properties": {
-        "playbookConfigurationId": {
-          "type": "string",
-          "description": ""
-        },
-        "azureResourceFamilyId": {
-          "type": "string",
-          "description": ""
-        },
-        "displayName": {
-          "type": "string",
-          "description": ""
-        },
-        "description": {
-          "type": "string",
-          "description": ""
-        },
-        "isEnabled": {
-          "type": "boolean",
-          "description": ""
-        },
-        "metadata": {
-          "type": "object",
-          "description": "",
-          "$ref": "#/definitions/PlaybookConfigurationMetadata"
-        },
-        "runsSummary": {
-          "type": "object",
-          "description": "",
-          "$ref": "#/definitions/RunsSummary"
-        },
-        "scopes": {
-          "type": "array",
-          "description": "",
-          "items": {
-            "$ref": "#/definitions/PlaybookConfigurationScope"
-          }
-        },
-        "sources": {
-          "type": "array",
-          "description": "",
-          "items": {
-            "$ref": "#/definitions/PlaybookConfigurationSource"
-          }
-        },
-        "actions": {
-          "type": "array",
-          "description": "",
-          "items": {
-            "$ref": "#/definitions/PlaybookConfigurationAction"
-          }
-        }
-      }
-    },
+			"type": "object",
+			"description": "The playbook configuration data.",
+			"properties": {
+				"description": {
+					"type": "string",
+					"description": ""
+				},
+				"isEnabled": {
+					"type": "boolean",
+					"description": ""
+				},
+				"metadata": {
+					"type": "object",
+					"description": "",
+					"$ref": "#/definitions/PlaybookConfigurationMetadata"
+				},
+				"scopes": {
+					"type": "array",
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/PlaybookConfigurationScope"
+					}
+				},
+				"sources": {
+					"type": "array",
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/PlaybookConfigurationSource"
+					}
+				},
+				"actions": {
+					"type": "array",
+					"description": "",
+					"items": {
+						"$ref": "#/definitions/PlaybookConfigurationAction"
+					}
+				}
+			}
+		},
     "PlaybookConfigurationMetadata": {
       "type": "object",
       "description": "",
@@ -380,33 +326,6 @@
         "lastUpdatedBy": {
           "readOnly": true,
           "type": "string",
-          "description": ""
-        }
-      }
-    },
-    "RunsSummary": {
-      "type": "object",
-      "description": "",
-      "properties": {
-        "totalCount": {
-          "readOnly": true,
-          "type": "integer",
-          "description": ""
-        },
-        "completedCount": {
-          "readOnly": true,
-          "type": "integer",
-          "description": ""
-        },
-        "failedCount": {
-          "readOnly": true,
-          "type": "integer",
-          "description": ""
-        },
-        "lastRunDateTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
           "description": ""
         }
       }

@@ -12,7 +12,54 @@
             "name": "myPlaybookConfigurationName",
             "type": "Microsoft.Security/playbookConfigurations",
             "properties": {
-
+              "description": "Alerts automatic dismiss",
+              "isEnabled": true,
+              "metadata": {
+                "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
+                "createdBy": "testUser@contoso.com",
+                "lastUpdatedDateTimeUtc": "2019-03-28T08:43:54.5755094Z",
+                "lastUpdatedBy": "testUser@contoso.com"
+              },
+              "scopes": [
+                {
+                  "scope": "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a"
+                },
+                {
+                  "scope": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+                }
+              ],
+              "sources": [
+                {
+                  "eventSource": "Alerts",
+                  "ruleSets": [
+                    {
+                      "eventValueJPath": "AlertType",
+                      "eventValuePrimitiveTypeName": "System.String",
+                      "valueToCompareEventValueTo": "customType",
+                      "valuesComparerOperator": "EqualsIgnoreCase"
+                    }
+                  ]
+                },
+                {
+                  "eventSource": "Recommendations",
+                  "ruleSets": [
+                    {
+                      "eventValueJPath": "tasks/severity",
+                      "eventValuePrimitiveTypeName": "System.String",
+                      "valueToCompareEventValueTo": "High",
+                      "valuesComparerOperator": "EqualsIgnoreCase"
+                    }
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "uri": "https://triggerUri1.com"
+                },
+                {
+                  "uri": "https://triggerUri2.com"
+                }
+              ]
             }
           }
         ]

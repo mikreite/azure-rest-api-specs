@@ -386,21 +386,11 @@
           "type": "string",
           "description": "The event source type."
         },
-        "eventSourceVersionFrom": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The lower version of the event source type."
-        },
-        "eventSourceVersionTo": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The upper version of the event source type."
-        },
         "ruleSets": {
           "type": "array",
           "description": "A set of rules which evaluate upon event interception.",
           "items": {
-            "$ref": "#/definitions/PlaybookConfigurationTriggeringRuleSet"
+            "$ref": "#/definitions/PlaybookConfigurationTriggeringRule"
           }
         }
       }
@@ -415,20 +405,7 @@
           "description": "The uri for the action to trigger."
         }
       }
-    },
-    "PlaybookConfigurationTriggeringRuleSet": {
-      "type": "object",
-      "description": "The set of rules which evaluate upon event interception.",
-      "properties": {
-        "rules": {
-          "type": "array",
-          "description": "The collection of rules.",
-          "items": {
-            "$ref": "#/definitions/PlaybookConfigurationTriggeringRule"
-          }
-        }
-      }
-    },
+    },    
     "PlaybookConfigurationTriggeringRule": {
       "type": "object",
       "description": "A logic rule which evaluates upon event interception. The rule is configured by comparing the specified expected value, in an expected property within the event model, by the specified operator.",

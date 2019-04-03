@@ -36,7 +36,7 @@
           }
         },
         "tags": [ "PlaybookConfigurations" ],
-        "description": "List playbook configurations in the subscription for the authenticated user.",
+        "description": "Get all playbook configurations in a subscription.",
         "operationId": "PlaybookConfigurations_ListBySubscription",
         "parameters": [
           {
@@ -70,7 +70,7 @@
           }
         },
         "tags": [ "PlaybookConfigurations" ],
-        "description": "List playbook configurations in the resource group for the authenticated user.",
+        "description": "Get all playbook configurations in a resource group.",
         "operationId": "PlaybookConfigurations_ListByResourceGroup",
         "parameters": [
           {
@@ -102,12 +102,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/playbookConfigurations/{playbookConfigurationName}": {
       "get": {
         "x-ms-examples": {
-          "Get a single playbook configuration of resource group": {
+          "Get a single playbook configuration details": {
             "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationResourceGroup_example.json"
           }
         },
         "tags": [ "PlaybookConfigurations" ],
-        "description": "Get the details of the playbook configuration.",
+        "description": "Get the details of a playbook configuration.",
         "operationId": "PlaybookConfigurations_GetByResourceGroup",
         "parameters": [
           {
@@ -140,7 +140,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update a single playbook configuration of resource group": {
+          "Create or update a single playbook configuration": {
             "$ref": "./examples/PlaybookConfigurations/PutPlaybookConfiguration_example.json"
           }
         },
@@ -159,9 +159,6 @@
           },
           {
             "$ref": "#/parameters/playbookConfigurationName"
-          },
-          {
-            "$ref": "#/parameters/Validate"
           },
           {
             "$ref": "#/definitions/PlaybookConfiguration"
@@ -188,9 +185,50 @@
           }
         }
       },
+      "post": {
+        "x-ms-examples": {
+          "Validate the playbook configuration model before create or update": {
+            "$ref": "./examples/PlaybookConfigurations/ValidatePlaybookConfiguration_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "Validate the playbook configuration model before create or update. Any validation errors are returned to the client.",
+        "operationId": "PlaybookConfigurations_Validate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/playbookConfigurationName"
+          },
+          {
+            "$ref": "#/definitions/PlaybookConfiguration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfigurationValidationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          }
+        }
+      },
       "delete": {
         "x-ms-examples": {
-          "Delete a single playbook configuration in a resource group scope": {
+          "Delete a single playbook configuration": {
             "$ref": "./examples/PlaybookConfigurations/DeletePlaybookConfiguration_example.json"
           }
         },
@@ -234,7 +272,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of playbook configurations.",
+          "description": "The list of playbook configurations under the given scope.",
           "items": {
             "$ref": "#/definitions/PlaybookConfiguration"
           }
@@ -263,108 +301,104 @@
       ]
     },
     "PlaybookConfigurationProperties": {
-			"type": "object",
-			"description": "The playbook configuration data.",
-			"properties": {
-				"description": {
-					"type": "string",
-					"description": ""
-				},
-				"isEnabled": {
-					"type": "boolean",
-					"description": ""
-				},
-				"metadata": {
-					"type": "object",
-					"description": "",
-					"$ref": "#/definitions/PlaybookConfigurationMetadata"
-				},
-				"scopes": {
-					"type": "array",
-					"description": "",
-					"items": {
-						"$ref": "#/definitions/PlaybookConfigurationScope"
-					}
-				},
-				"sources": {
-					"type": "array",
-					"description": "",
-					"items": {
-						"$ref": "#/definitions/PlaybookConfigurationSource"
-					}
-				},
-				"actions": {
-					"type": "array",
-					"description": "",
-					"items": {
-						"$ref": "#/definitions/PlaybookConfigurationAction"
-					}
-				}
-			}
-		},
+      "type": "object",
+      "description": "The playbook configuration data.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The playbook configuration description."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the playbook configuration is enabled."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata of the playbook configuration resource.",
+          "$ref": "#/definitions/PlaybookConfigurationMetadata"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "A collection of the resources scopes on which the playbook configurations logic is applied. Each scope defines its set of rules which evaluate upon event notification",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationScope"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "A collection of the source event types which evaluate the playbook configuration set of rules. For example - security alerts and recommended tasks.",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationSource"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "description": "A collection of the actions which are triggered upon true evaluation of the configured rule sets.",
+          "items": {
+            "$ref": "#/definitions/PlaybookConfigurationAction"
+          }
+        }
+      }
+    },
     "PlaybookConfigurationMetadata": {
       "type": "object",
-      "description": "",
+      "description": "The metadata of the playbook configuration resource.",
       "properties": {
         "createdDateTimeUtc": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": ""
+          "description": "The playbook configuration creation date."
         },
         "createdBy": {
           "readOnly": true,
           "type": "string",
-          "description": ""
+          "description": "The AAD username that created the playbook configuration."
         },
         "lastUpdatedDateTimeUtc": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": ""
+          "description": "The playbook configuration last updated date."
         },
         "lastUpdatedBy": {
           "readOnly": true,
           "type": "string",
-          "description": ""
+          "description": "The AAD username that last updated the playbook configuration."
         }
       }
     },
     "PlaybookConfigurationScope": {
       "type": "object",
-      "description": "",
+      "description": "The resources scope on which the playbook configurations logic is applied. The scope defines its set of rules which evaluate upon event interception.",
       "properties": {
-        "name": {
+        "scope": {
           "type": "string",
-          "description": ""
-        },
-        "familyResourceId": {
-          "type": "string",
-          "description": ""
+          "description": "The resources scope on which the playbook configurations logic is applied."
         }
       }
     },
     "PlaybookConfigurationSource": {
       "type": "object",
-      "description": "",
+      "description": "The source event types which evaluate the playbook configuration set of rules. For example - security alerts and recommended tasks.",
       "properties": {
         "eventSource": {
           "type": "string",
-          "description": ""
+          "description": "The event source type."
         },
         "eventSourceVersionFrom": {
           "readOnly": true,
           "type": "string",
-          "description": ""
+          "description": "The lower version of the event source type."
         },
         "eventSourceVersionTo": {
           "readOnly": true,
           "type": "string",
-          "description": ""
+          "description": "The upper version of the event source type."
         },
         "ruleSets": {
           "type": "array",
-          "description": "",
+          "description": "A set of rules which evaluate upon event interception.",
           "items": {
             "$ref": "#/definitions/PlaybookConfigurationTriggeringRuleSet"
           }
@@ -373,30 +407,22 @@
     },
     "PlaybookConfigurationAction": {
       "type": "object",
-      "description": "",
+      "description": "The action which is triggered upon true evaluation of the configured rule sets.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": ""
-        },
-        "type": {
-          "type": "string",
-          "description": ""
-        },
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": ""
+          "description": "The uri for the action to trigger."
         }
       }
     },
     "PlaybookConfigurationTriggeringRuleSet": {
       "type": "object",
-      "description": "",
+      "description": "The set of rules which evaluate upon event interception.",
       "properties": {
         "rules": {
           "type": "array",
-          "description": "",
+          "description": "The collection of rules.",
           "items": {
             "$ref": "#/definitions/PlaybookConfigurationTriggeringRule"
           }
@@ -405,23 +431,50 @@
     },
     "PlaybookConfigurationTriggeringRule": {
       "type": "object",
-      "description": "",
+      "description": "A logic rule which evaluates upon event interception. The rule is configured by comparing the specified expected value, in an expected property within the event model, by the specified operator.",
       "properties": {
         "eventValueJPath": {
           "type": "string",
-          "description": ""
+          "description": "The JPath of the entity model property that should be checked."
         },
         "eventValuePrimitiveTypeName": {
           "type": "string",
-          "description": ""
+          "description": "The data type of the compared operands."
         },
         "valueToCompareEventValueTo": {
           "type": "string",
-          "description": ""
+          "description": "The expected logic value."
         },
-        "valuesCompareOperand": {
+        "valuesComparerOperator": {
           "type": "string",
-          "description": ""
+          "description": "The comparer operator to use.",
+          "enum": [
+            "Equals",
+            "EqualsIgnoreCase",
+            "GreaterThan",
+            "GreaterThanOrEqualTo",
+            "LesserThan",
+            "LesserThanOrEqualTo",
+            "NotEquals",
+            "NotEqualsIgnoreCase",
+            "Contains",
+            "StartsWith",
+            "EndsWith"
+          ]
+        }
+      }
+    },
+    "PlaybookConfigurationValidationStatus": {
+      "type": "object",
+      "description": "The playbook configuration model state property bag.",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether the model is valid or not."
+        },
+        "message": {
+          "type": "string",
+          "description": "The validation message."
         }
       }
     }
@@ -432,15 +485,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Playbook Configuration Id.",
-      "x-ms-parameter-location": "method"
-    },
-    "Validate": {
-      "name": "validate",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Indicates whether to perform a validation process only before PUT operation",
+      "description": "The playbook Configuration name.",
       "x-ms-parameter-location": "method"
     }
   }
